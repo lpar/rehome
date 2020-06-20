@@ -16,8 +16,8 @@ Long term, perhaps `systemd-homed` can start enforcing XDG Base Directory Specif
 
  1. Create `~/.local/share/rehome`. This is where the fake home directories 
    will be stored.
- 2. Add ~/.local/rehome/bin to the front if your path. This is where you create symlinks to the rehome binary for each program you want to rehome.
- 3. Make sure ~/.local/rehome/bin is at the front of your path. (Or at least, ahead of anything you want to rehome.)
+ 2. Add `~/.local/rehome/bin` to the front if your path. This is where you create symlinks to the rehome binary for each program you want to rehome.
+ 3. Make sure `~/.local/rehome/bin` is at the front of your path. (Or at least, ahead of anything you want to rehome.)
  4. Compile `rehome` and put it somewhere; it doesn't need to be in your path.
 
 To compile `rehome`, just
@@ -39,7 +39,7 @@ the target program in the final step. (This change to the path only affects the
 `rehome` process and child processes, it isn't exported to the parent shell.)
  5. Rehome works out a fake `HOME` directory location, by appending the target
 program name to `~/.local/share/rehome`. It creates the directory if necessary,
-in this case ~/.local/share/rehome/ansible`, and sets `HOME` to that value, again only for itself and child processes.
+in this case `~/.local/share/rehome/ansible`, and sets `HOME` to that value, again only for itself and child processes.
  6. Finally, `rehome` uses `execvp` to replace itself with the target program, as found in the adjusted `PATH`.
 
 So when `ansible` runs, it finds `HOME=~/.local/share/rehome/ansible` and writes its data directory there.
